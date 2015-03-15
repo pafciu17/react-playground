@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     gulpFilter = require('gulp-filter'),
     reactify = require('reactify');
 
-gulp.task('serve', function() {
+gulp.task('serve', ['browserify'], function() {
     connect.server({
         root: 'app',
         port: 8001,
@@ -31,6 +31,9 @@ gulp.task('browserify', function(){
         transform: [reactify]
     });
     return b.bundle()
+        .on('error', function(err) {
+            console.log(err.message);
+        })
         .pipe(source('main.js'))
         .pipe(rename(function(path) {
             path.basename = 'bundle';

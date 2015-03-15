@@ -1,12 +1,17 @@
 var React = require('react'),
-    IntroductionPage = require('./IntroductionPage'),
-    InputPersonalDataPage = require('./InputPersonalDataPage');
+    Router = require('react-router');
+
+var Route = Router.Route,
+    DefaultRoute = Router.DefaultRoute,
+    RouteHandler = Router.RouteHandler;
 
 module.exports = React.createClass({
-    render: function() {
+    mixins: [ Router.State ],
+    render: function () {
+        var name = this.getRoutes().slice(0).reverse()[0].name;
         return (
             <div className="app">
-                <InputPersonalDataPage />
+                <RouteHandler key={name}/>
             </div>
         );
     }

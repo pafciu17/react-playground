@@ -1,7 +1,10 @@
+console.log('starts');
 var React = require('react'),
-    App = require('./components/App');
+    Router = require('react-router'),
+    routes = require('./routes');
 
-React.render(
-    <App />,
-    document.getElementById('app')
-);
+console.log('ok');
+
+Router.run(routes, function (Handler) {
+    React.render(<Handler/>, document.body);
+});
